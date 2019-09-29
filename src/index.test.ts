@@ -1,42 +1,42 @@
-import { clamp, interpolate, safeInterpolate, smooth, smoother } from './index';
+import { Clamp, Interpolate, SafeInterpolate, Smooth, Smoother } from './index';
 
 test("clamp(x, a, b) clamps x in the range [a, b]", () => {
-    expect(clamp(1, 2, 4)).toBe(2);
-    expect(clamp(2, 2, 4)).toBe(2);
-    expect(clamp(3, 2, 4)).toBe(3);
-    expect(clamp(3.5, 2, 4)).toBe(3.5);
-    expect(clamp(4, 2, 4)).toBe(4);
-    expect(clamp(5, 2, 4)).toBe(4);
+    expect(Clamp(1, 2, 4)).toBe(2);
+    expect(Clamp(2, 2, 4)).toBe(2);
+    expect(Clamp(3, 2, 4)).toBe(3);
+    expect(Clamp(3.5, 2, 4)).toBe(3.5);
+    expect(Clamp(4, 2, 4)).toBe(4);
+    expect(Clamp(5, 2, 4)).toBe(4);
 });
 
 test("interpolate(a, b, t) does unbounded linear interpolation between a and b", () => {
-    expect(interpolate(1, 3, 0)).toBe(1);
-    expect(interpolate(1, 3, 0.5)).toBe(2);
-    expect(interpolate(1, 3, 1)).toBe(3);
-    expect(interpolate(1, 3, -1)).toBe(-1);
-    expect(interpolate(1, 3, 1.5)).toBe(4);
+    expect(Interpolate(1, 3, 0)).toBe(1);
+    expect(Interpolate(1, 3, 0.5)).toBe(2);
+    expect(Interpolate(1, 3, 1)).toBe(3);
+    expect(Interpolate(1, 3, -1)).toBe(-1);
+    expect(Interpolate(1, 3, 1.5)).toBe(4);
 });
 
-test("safeInterpolate(a, b, t) does clamped linear interpolation between a and b", () => {
-    expect(safeInterpolate(1, 3, 0)).toBe(1);
-    expect(safeInterpolate(1, 3, 0.5)).toBe(2);
-    expect(safeInterpolate(1, 3, 1)).toBe(3);
-    expect(safeInterpolate(1, 3, -1)).toBe(1);
-    expect(safeInterpolate(1, 3, 1.5)).toBe(3);
+test("SafeInterpolate(a, b, t) does clamped linear interpolation between a and b", () => {
+    expect(SafeInterpolate(1, 3, 0)).toBe(1);
+    expect(SafeInterpolate(1, 3, 0.5)).toBe(2);
+    expect(SafeInterpolate(1, 3, 1)).toBe(3);
+    expect(SafeInterpolate(1, 3, -1)).toBe(1);
+    expect(SafeInterpolate(1, 3, 1.5)).toBe(3);
 });
 
-test("smooth(x) smoothly transitions from 0 for x < 0 to 1 for x > 1", () => {
-    expect(smooth(-1)).toBe(0);
-    expect(smooth(0)).toBe(0);
-    expect(smooth(0.5)).toBe(0.5);
-    expect(smooth(1)).toBe(1);
-    expect(smooth(2)).toBe(1);
+test("Smooth(x) Smoothly transitions from 0 for x < 0 to 1 for x > 1 (3d degree sigmoid)", () => {
+    expect(Smooth(-1)).toBe(0);
+    expect(Smooth(0)).toBe(0);
+    expect(Smooth(0.5)).toBe(0.5);
+    expect(Smooth(1)).toBe(1);
+    expect(Smooth(2)).toBe(1);
 });
 
-test("smoother(x) smoothly transitions from 0 for x < 0 to 1 for x > 1", () => {
-    expect(smoother(-1)).toBe(0);
-    expect(smoother(0)).toBe(0);
-    expect(smoother(0.5)).toBe(0.5);
-    expect(smoother(1)).toBe(1);
-    expect(smoother(2)).toBe(1);
+test("Smoother(x) Smoothly transitions from 0 for x < 0 to 1 for x > 1 (5th degree sigmoid)", () => {
+    expect(Smoother(-1)).toBe(0);
+    expect(Smoother(0)).toBe(0);
+    expect(Smoother(0.5)).toBe(0.5);
+    expect(Smoother(1)).toBe(1);
+    expect(Smoother(2)).toBe(1);
 });
