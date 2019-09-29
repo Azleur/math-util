@@ -1,6 +1,6 @@
 {
     "private": true,
-    "name": "math-utils",
+    "name": "math-util",
     "version": "0.1.0",
     "author": "Azleur",
     "main": "dist/index.js",
