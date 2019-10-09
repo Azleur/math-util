@@ -28,3 +28,9 @@ export function Smoother(x: number): number {
     if (x >= 1) return 1;
     return x * x * x * (10 + x * (-15 + 6 * x)); // 6x^5 - 15x^4 + 10x^3
 }
+
+// TODO: TEST!
+/** Rescales a point x in the interval [aIn, bIn] to the interval [aOut, bOut]. */
+export function Map(x: number, aIn: number, bIn: number, aOut: number, bOut: number): number {
+    return (bOut - aOut) * (x - aIn) / (bIn - aIn) + aOut;
+}
