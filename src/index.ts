@@ -8,6 +8,12 @@ export function Interpolate(a: number, b: number, t: number): number {
     return a + (b - a) * t;
 }
 
+// TODO: TEST!
+/** Rescales a point x from the interval [aIn, bIn] to the interval [aOut, bOut]. */
+export function Map(x: number, aIn: number, bIn: number, aOut: number, bOut: number): number {
+    return (bOut - aOut) * (x - aIn) / (bIn - aIn) + aOut;
+}
+
 /** Linearly interpolate between a at t=0 and b at t=1 (t IS clamped to [0, 1]). */
 export function SafeInterpolate(a: number, b: number, t: number): number {
     if (t <= 0) return a;
@@ -27,10 +33,4 @@ export function Smoother(x: number): number {
     if (x <= 0) return 0;
     if (x >= 1) return 1;
     return x * x * x * (10 + x * (-15 + 6 * x)); // 6x^5 - 15x^4 + 10x^3
-}
-
-// TODO: TEST!
-/** Rescales a point x in the interval [aIn, bIn] to the interval [aOut, bOut]. */
-export function Map(x: number, aIn: number, bIn: number, aOut: number, bOut: number): number {
-    return (bOut - aOut) * (x - aIn) / (bIn - aIn) + aOut;
 }
