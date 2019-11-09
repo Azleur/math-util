@@ -8,7 +8,6 @@ export function Interpolate(a: number, b: number, t: number): number {
     return a + (b - a) * t;
 }
 
-// TODO: TEST!
 /** Rescales a point x from the interval [aIn, bIn] to the interval [aOut, bOut]. */
 export function Map(x: number, aIn: number, bIn: number, aOut: number, bOut: number): number {
     return (bOut - aOut) * (x - aIn) / (bIn - aIn) + aOut;

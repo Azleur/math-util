@@ -1,6 +1,6 @@
-import { Clamp, Interpolate, SafeInterpolate, Smooth, Smoother } from './index';
+import { Clamp, Interpolate, SafeInterpolate, Smooth, Smoother, Map } from './index';
 
-test("clamp(x, a, b) clamps x in the range [a, b]", () => {
+test("Clamp(x, a, b) clamps x in the range [a, b]", () => {
     expect(Clamp(1, 2, 4)).toBe(2);
     expect(Clamp(2, 2, 4)).toBe(2);
     expect(Clamp(3, 2, 4)).toBe(3);
@@ -9,12 +9,20 @@ test("clamp(x, a, b) clamps x in the range [a, b]", () => {
     expect(Clamp(5, 2, 4)).toBe(4);
 });
 
-test("interpolate(a, b, t) does unbounded linear interpolation between a and b", () => {
+test("Interpolate(a, b, t) does unbounded linear interpolation between a and b", () => {
     expect(Interpolate(1, 3, 0)).toBe(1);
     expect(Interpolate(1, 3, 0.5)).toBe(2);
     expect(Interpolate(1, 3, 1)).toBe(3);
     expect(Interpolate(1, 3, -1)).toBe(-1);
     expect(Interpolate(1, 3, 1.5)).toBe(4);
+});
+
+test("Map(x, a0, b0, a1, b1) remaps x from [a0,b0] to [a1, b1] and is NOT clamped", () => {
+    expect(Map(1, 1, 3, 2, 5)).toBe(2); // Min to min.
+    expect(Map(3, 1, 3, 2, 5)).toBe(5); // Max to max.
+    expect(Map(2, 1, 3, 2, 5)).toBe(3.5); // Midpoint to midpoint.
+    expect(Map(0, 1, 3, 2, 5)).toBe(0.5); // Not clamped (below).
+    expect(Map(5, 1, 3, 2, 5)).toBe(8); // Not clamped (above).
 });
 
 test("SafeInterpolate(a, b, t) does clamped linear interpolation between a and b", () => {
