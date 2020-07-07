@@ -1,3 +1,6 @@
+/** True if number too small for safe float operations. */
+export const IsEpsilon = (x: number): boolean => Math.abs(x) <= Number.EPSILON;
+
 /** Clamp x in the range [min, max]. */
 export function Clamp(x: number, min: number, max: number): number {
     return Math.max(min, Math.min(x, max));

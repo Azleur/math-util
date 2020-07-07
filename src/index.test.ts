@@ -1,4 +1,4 @@
-import { Clamp, Interpolate, SafeInterpolate, Smooth, Smoother, Map } from './index';
+import { Clamp, Interpolate, SafeInterpolate, Smooth, Smoother, Map, IsEpsilon } from './index';
 
 test("Clamp(x, a, b) clamps x in the range [a, b]", () => {
     expect(Clamp(1, 2, 4)).toBe(2);
@@ -47,4 +47,18 @@ test("Smoother(x) Smoothly transitions from 0 for x < 0 to 1 for x > 1 (5th degr
     expect(Smoother(0.5)).toBe(0.5);
     expect(Smoother(1)).toBe(1);
     expect(Smoother(2)).toBe(1);
+});
+
+test("IsEpsilon(x) returns true for very small values of |x|, false otherwise", () => {
+    expect(IsEpsilon(0)).toBe(true);
+    expect(IsEpsilon(1)).toBe(false);
+    expect(IsEpsilon(Number.EPSILON)).toBe(true);
+    expect(IsEpsilon(0.0001)).toBe(false);
+    expect(IsEpsilon(9999)).toBe(false);
+
+    expect(IsEpsilon(-0)).toBe(true);
+    expect(IsEpsilon(-1)).toBe(false);
+    expect(IsEpsilon(-Number.EPSILON)).toBe(true);
+    expect(IsEpsilon(-0.0001)).toBe(false);
+    expect(IsEpsilon(-9999)).toBe(false);
 });
